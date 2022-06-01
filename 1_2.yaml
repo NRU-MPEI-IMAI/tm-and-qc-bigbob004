@@ -1,0 +1,73 @@
+name: binary increment
+source code: |
+  # Adds 1 to a binary number.
+  input: 'x1'
+  blank: ' '
+  start state: to_end_1
+  table:
+    # scan to the rightxost digit
+    to_end_1:
+      1: {R: to_end_1}
+      x: {R: to_end_1}
+      ' ': {write: =, L: to_first}
+      =: {R: to_end_2}
+    to_first:
+      1: {L: to_first}
+      =: {L: to_first}
+      x: {R: check_1}
+      y: {R: change_2}
+    check_1:
+      =: {R: FINAL}
+      1: {L: check_2}
+    check_2:
+      x: {L: change_1}
+    change_1:
+      1: {write: 0, R: to_second}
+      ' ': {R: FINAL}
+    to_second:
+      1: {R: to_second}
+      x: {R: change_2}
+    change_2:
+      =: {L: change_3}
+      1: {write: y, R: to_end_1}
+    change_3:
+      y: {write: 1, L: change_3}
+      x: {L: change_3}
+      1: {write: 1, L: change_3}
+      0: {write: 1, L: change_1}
+    to_end_2:
+      1: {R: to_end_2}
+      ' ': {write: 1, L: to_first}
+    FINAL:
+      1: {R: FINAL}
+      x: {R: FINAL}
+      =: {R: FINAL}
+      ' ': {R: acc}
+    acc:
+
+
+  # Exercises:
+
+  # • Modify the machine to always halt on the leftmost digit
+  #   (regardless of the number's length).
+  #   Hint: add a state between carry and done.
+
+  # • Make a machine that adds 2 instead of 1.
+  #   Hint: 2 is '10' in binary, so the last digit is unaffected.
+  #   Alternative hint: chain together two copies of the machine from
+  #   the first exercise (renaming the states of the second copy).
+
+  # • Make a machine to subtract 1.
+  #   To simplify things, assume the input is always greater than 0.
+positions:
+  to_end_1: {x: 248.94, y: 69.22, fixed: false}
+  to_first: {x: 279.2, y: 203.97, fixed: false}
+  check_1: {x: 289.22, y: 361.78, fixed: false}
+  check_2: {x: 415.68, y: 415.34, fixed: false}
+  change_1: {x: 540.36, y: 360.65, fixed: false}
+  to_second: {x: 549.35, y: 199.54, fixed: false}
+  change_2: {x: 401.28, y: 131.5, fixed: false}
+  change_3: {x: 498.1, y: 230.19, fixed: false}
+  to_end_2: {x: 375.64, y: 76.02, fixed: false}
+  FINAL: {x: 417.82, y: 465.58, fixed: false}
+  acc: {x: 363.46, y: 332.47, fixed: false}

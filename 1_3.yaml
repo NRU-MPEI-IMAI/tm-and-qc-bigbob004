@@ -1,0 +1,33 @@
+name: palindrome
+source code: |-
+  input: '001122000'
+  blank: ' '
+  start state: start
+  table:
+    start:
+      0: {write: X, R: have_zero}
+      Y: {R: matching}
+      ' ': {R: accepting}
+    have_zero:
+      [0,Y]: R
+      1: {write: Y, R: have_one}
+    have_one:
+      [1,Z]: R
+      2: {write: Z, L: back}
+    back:
+      [0, 1, 2, Y, Z]: L
+      X: {R: start}
+    matching:
+      [Z,Y]: R
+      ' ': {R: accepting}
+    accepting:
+      ' ': {write: a, R: acc}
+    acc:
+positions:
+  start: {x: 400, y: 185}
+  have_zero: {x: 535.42, y: 241.55, fixed: false}
+  have_one: {x: 522.26, y: 385.61, fixed: false}
+  back: {x: 400, y: 315}
+  matching: {x: 286.61, y: 284.13, fixed: false}
+  accepting: {x: 261.58, y: 146.13, fixed: false}
+  acc: {x: 374.08, y: 56.73, fixed: false}

@@ -1,0 +1,40 @@
+name: binary increment
+source code: |
+  # Adds 1 to a binary number.
+  input: '11+1'
+  blank: ' '
+  start state: to_end
+  table:
+    # scan to the rightmost digit
+    to_end:
+      1: {write: 1, R: to_end}
+      +: {write: +, R: to_end}
+      ' ': {write: ' ', L: is_one}
+    # then carry the 1
+    is_one:
+      1: {write: ' ', L: to_plus}
+      +: {write: ' ', R: acc}
+    to_plus:
+      1: {write: 1, L: to_plus}
+      +: {write: 1, R: acc}
+    acc:
+
+
+  # Exercises:
+
+  # • Modify the machine to always halt on the leftmost digit
+  #   (regardless of the number's length).
+  #   Hint: add a state between carry and done.
+
+  # • Make a machine that adds 2 instead of 1.
+  #   Hint: 2 is '10' in binary, so the last digit is unaffected.
+  #   Alternative hint: chain together two copies of the machine from
+  #   the first exercise (renaming the states of the second copy).
+
+  # • Make a machine to subtract 1.
+  #   To simplify things, assume the input is always greater than 0.
+positions:
+  to_end: {x: 225.4, y: 252.09}
+  is_one: {x: 385.56, y: 253.89}
+  to_plus: {x: 536.18, y: 252.34}
+  acc: {x: 455.97, y: 134.71, fixed: false}

@@ -1,0 +1,10 @@
+name: palindrome
+source code: "input: '\\'\r\nblank: ' '\r\nstart state: start\r\ntable:\r\n  start:\r\n    [(, /, +]: {R: start}\r\n    ): {write: X, L: q_1_)}\r\n    \\: {write: Y, L: q_1_\\}\r\n    -: {write: Z, L: q_1_-}\r\n    ' ': {L: q2}\r\n    [X, Y, Z]: {R: start}\r\n  q_1_):\r\n    (: {write: X, R: start}\r\n    ): {L: q_1_)}\r\n    ' ': {L: rej}\r\n    [X, Y, Z]: {L: q_1_)}\r\n  q_1_\\:\r\n    /: {write: Y, R: start}\r\n    \\: {L: q_1_\\}\r\n    ' ': {L: rej}\r\n    [X, Y, Z]: {L: q_1_\\}\r\n  q_1_-:\r\n    +: {write: Z, R: start}\r\n    -: {L: q_1_-}\r\n    ' ': {L: rej}\r\n    [X, Y, Z]: {L: q_1_-}\r\n  q2:\r\n    [(, /, +]: {L: rej}\r\n    ' ': {write: 1, L: acc}\r\n    [X, Y, Z]: {L: q2}\r\n  acc:\r\n  rej:"
+positions:
+  start: {x: 400, y: 185}
+  q_1_): {x: 693.37, y: 200.15}
+  q_1_\: {x: 405.7, y: 325.33, fixed: false}
+  q_1_-: {x: 690.69, y: 421.8}
+  q2: {x: 211.52, y: 333.62}
+  acc: {x: 251.27, y: 194.65, fixed: false}
+  rej: {x: 479.75, y: 448.76}
